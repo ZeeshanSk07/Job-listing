@@ -1,23 +1,33 @@
 import UserAvatar from "../assets/random_Avatar.jpg";
 import { useNavigate } from "react-router-dom";
 
-export const Header = ({ userDetails }) => {
+export const Header = ({ currentUser, setCurrentUser }) => {
 
     const navigate = useNavigate();
 
 	return (
 		<div>
 			<h1>Jobfinder</h1>
-			{userDetails && (
+			{currentUser && (
 				<div>
+					<button
+						onClick={() => {
+							setCurrentUser(false);
+							localStorage.removeItem("token");
+							navigate("/login");
+						}}
+					>
+						Logout
+					</button>
+					<h4>Hello! Recruiter</h4>
 					<img src={UserAvatar} alt="" />
 				</div>
 			)}
-			{!userDetails && (
+
+			{!currentUser && (
 				<div>
-                <button
+                	<button
 						onClick={() => {
-							// setPath("/login");
 							navigate("/login");
 						}}
 					>

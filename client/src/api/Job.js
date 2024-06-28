@@ -4,17 +4,10 @@ const BACKEND_ORIGIN_URL = 'http://localhost:3000';
 
 const fetchJobs = async ({ searchTerm, filters }) => {
     try {
-        const response = await axios.get(`${BACKEND_ORIGIN_URL}/job`, {
-            params: {
-                searchTerm,
-                fullTime: filters.fullTime,
-                partTime: filters.partTime,
-                remote: filters.remote,
-            },
-        });
+        const response = await axios.get(`${BACKEND_ORIGIN_URL}/job`);
         return response;
     } catch (error) {
-        return error.response.data;
+        return error;
     }
 };
 
@@ -34,9 +27,18 @@ const fetchJobsByQuery = async (query) => {
         });
         return response;
     } catch (error) {
-        return error.response.data;
+        return error;
+    }
+};
+
+const fetchJobById = async (id) => {
+    try {
+        const response = await axios.get(`${BACKEND_ORIGIN_URL}/job/${id}`);
+        return response;
+    } catch (error) {
+        return error;
     }
 };
 
 
-export { fetchJobs, fetchJobsByQuery};
+export { fetchJobs, fetchJobsByQuery, fetchJobById};

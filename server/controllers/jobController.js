@@ -1,7 +1,7 @@
 const Job = require('../model/job');
 
 function getJobById() {
-    return async (req, res) => {
+    return async (req, res,next) => {
         try {
             const jobID = req.params.id;
             const job = await Job.findById(jobID);
@@ -56,32 +56,21 @@ function getFilteredJobs() {
     return async (req, res) => {
 
         try {
-            const { title, minSalary, maxSalary, jobType, location, remote, skills } = req.query;
-            const skillsArray = skills ? skills.split(',') : [];
+            const { title, skills } = req.query;
+            console.log(title, skills);
             const jobs = await Job.find(
                 {
-                    salary: {
-                        $gte: parseInt(minSalary) || 0,
-                        $lte: parseInt(maxSalary) || 999999999
-                    },
-                    jobType: jobType || { $exists: true },
-                    location: location || { $exists: true },
+                   title: title || { $exists: true },
                 }
             );
 
-            const finalJobs = jobs.filter(job => {
-                let isSkillMatched = true;
-                if (skillsArray.length > 0) {
-                    isSkillMatched = skillsArray.every(skill => job.skillsRequired.includes(skill));
-                }
-                return isSkillMatched;
-            });
+            
 
             //Handle this in the mongoose query itself
             res.status(200).json({
                 message: 'Job route is working fine',
                 status: 'Working',
-                jobs: finalJobs
+                jobs: jobs
             });
         } catch (error) {
             next("Error Finding Jobs", error);

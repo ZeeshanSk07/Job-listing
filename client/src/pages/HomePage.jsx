@@ -3,30 +3,28 @@ import { fetchJobs, fetchJobsByQuery } from "../api/Job";
 import { Header } from "../components/Header";
 import { QueryWidget } from "../components/QueryWidget";
 
-function HomePage() {
+function HomePage({ currentUser, setCurrentUser }) {
 	const [jobs, setJobs] = useState([]);
-	const altJobIcon = "https://static.thenounproject.com/png/2343509-200.png";
+	const [query, setQuery] = useState({
+		title: "",
+		skills: [],
+	});
+	
 	useEffect(() => {
 		handleFetchJobs();
 	}, []);
 
 	const handleFetchJobs = async () => {
-        const query = {
-                    minSalary: 0,
-                    maxSalary: 100000000,
-                };
 		const response = await fetchJobsByQuery(query);		
         if (response.status == 200) {
 			setJobs(response.data.jobs);
 		}
 	};
-	useEffect(() => {
-		console.log(jobs);
-	}, [jobs]);
+	
 
 	return (
 		<div>
-			<Header />
+			<Header currentUser={currentUser} setCurrentUser={setCurrentUser}  />
             <QueryWidget/>
 			{jobs.map((job, index) => (
 				<div key={index}>
