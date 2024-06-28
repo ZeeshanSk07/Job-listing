@@ -3,9 +3,9 @@ const jwt = require('jsonwebtoken');
 const User = require('../model/User');
 
 function registerUser() {
-    return async (req, res) => {
+    return async (req, res, next) => {
         try {
-            const { name, email, password } = req.body;
+            const { name, email, mobile, password } = req.body;
 
             const existingUser = await User.findOne({ email: email });
 
@@ -18,16 +18,22 @@ function registerUser() {
                 const newUser = new User({
                     name,
                     email,
+                    mobile,
                     password: hashedPassword,
                 });
+                console.log(newUser);
 
                 await newUser.save();
+
+                console.log("After commiting: ", newUser);
+
                 res.status(201).json({
                     message: 'User created successfully',
                     user: newUser
                 });
             }
         } catch (error) {
+            console.log(error);
             next("Error Creating User", error);
         }
 
