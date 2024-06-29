@@ -1,4 +1,4 @@
-import { useState } from "react";
+/* eslint-disable react/prop-types */
 import skills from "../data/skills";
 
 export const QueryWidget = ({ query, setQuery, handleFetchJobs }) => {
@@ -14,6 +14,7 @@ export const QueryWidget = ({ query, setQuery, handleFetchJobs }) => {
 	const handleClearFilters = () => {
 		setQuery({ title: "", skills: [] });
 	};
+
 	return (
 		<div>
 			<input

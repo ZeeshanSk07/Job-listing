@@ -1,9 +1,9 @@
-import UserAvatar from "../assets/random_Avatar.jpg";
+/* eslint-disable react/prop-types */
 import { useNavigate } from "react-router-dom";
+import UserAvatar from "../assets/random_Avatar.jpg";
 
 export const Header = ({ currentUser, setCurrentUser }) => {
-
-    const navigate = useNavigate();
+	const navigate = useNavigate();
 
 	return (
 		<div>
@@ -23,10 +23,9 @@ export const Header = ({ currentUser, setCurrentUser }) => {
 					<img src={UserAvatar} alt="" />
 				</div>
 			)}
-
 			{!currentUser && (
 				<div>
-                	<button
+					<button
 						onClick={() => {
 							navigate("/login");
 						}}

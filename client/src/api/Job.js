@@ -1,10 +1,11 @@
 import axios from 'axios';
+
 const BACKEND_ORIGIN_URL = 'http://localhost:3000';
 
 
-const fetchJobs = async ({ searchTerm, filters }) => {
+const fetchJobs = async () => {
     try {
-        const response = await axios.get(`${BACKEND_ORIGIN_URL}/job`);
+        const response = await axios.get(`/job`);
         return response;
     } catch (error) {
         return error;
@@ -12,10 +13,13 @@ const fetchJobs = async ({ searchTerm, filters }) => {
 };
 
 const fetchJobsByQuery = async (query) => {
-    const { title,
-        skills } = query;
+    const {
+        title,
+        skills
+    } = query;
+    console.log(skills);
     try {
-        const response = await axios.get(`${BACKEND_ORIGIN_URL}/job`, {
+        const response = await axios.get(`/job`, {
             params: {
                 title,
                 skills
@@ -29,7 +33,7 @@ const fetchJobsByQuery = async (query) => {
 
 const fetchJobById = async (id) => {
     try {
-        const response = await axios.get(`${BACKEND_ORIGIN_URL}/job/${id}`);
+        const response = await axios.get(`/job/${id}`);
         return response;
     } catch (error) {
         return error;
@@ -44,7 +48,7 @@ const createJob = async (job) => {
                 Authorization: `Bearer ${token}`
             }
         };
-        const response = await axios.post(`${BACKEND_ORIGIN_URL}/job/add`, job, config);
+        const response = await axios.post(`/job/add`, job, config);
         console.log(response);
         return response;
     } catch (error) {
@@ -53,4 +57,4 @@ const createJob = async (job) => {
 };
 
 
-export { fetchJobs, fetchJobsByQuery, fetchJobById, createJob};
+export { fetchJobs, fetchJobsByQuery, fetchJobById, createJob };

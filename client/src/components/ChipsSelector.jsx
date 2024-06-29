@@ -1,5 +1,5 @@
-import React from "react";
 import { useState, useEffect } from "react";
+import React from "react";
 import styles from "./ChipsSelector.module.css";
 
 const ChipsSelector = ({ selectedSkills, setSelectedSkills }) => {
@@ -10,7 +10,7 @@ const ChipsSelector = ({ selectedSkills, setSelectedSkills }) => {
 		setCurrentSkill(skill);
 	};
 
-    const handleOnKeyDown = (e) => {
+	const handleOnKeyDown = (e) => {
 		if (e.key == "Enter") {
 			if (selectedSkills.includes(currentSkill.trim())) {
 				return;
@@ -35,11 +35,10 @@ const ChipsSelector = ({ selectedSkills, setSelectedSkills }) => {
 		// console.log(suggestSkills());
 	}, [selectedSkills, currentSkill]);
 
-
 	return (
 		<div>
 			<label>Skills Required: </label>
-            {suggestSkills().map((skill, index) => (
+			{suggestSkills().map((skill, index) => (
 				<button key={index} onClick={() => handleAddSkill(skill)}>
 					{skill}
 				</button>
@@ -53,7 +52,7 @@ const ChipsSelector = ({ selectedSkills, setSelectedSkills }) => {
 				className={styles.inputBar}
 			/>
 
-<div className={styles.chipsContainer}>
+			<div className={styles.chipsContainer}>
 				{selectedSkills?.map((skill, index) => {
 					return (
 						<div key={index} className={styles.chip}>

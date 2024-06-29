@@ -7,8 +7,8 @@ import HomePage from "./pages/HomePage.jsx";
 import RegisterPage from "./pages/RegisterPage.jsx";
 import JobPage from "./pages/JobPage.jsx";
 import CreateJobPage from "./pages/CreateJobPage.jsx";
-import "./App.css";
 
+import "./App.css";
 function App() {
 	const [currentUser, setCurrentUser] = useState(false);
 
@@ -41,7 +41,7 @@ function App() {
 						/>
 					}
 				/>
-        <Route
+				<Route
 					path="/create"
 					element={<CreateJobPage currentUser={currentUser} />}
 				/>
@@ -49,4 +49,5 @@ function App() {
 		</BrowserRouter>
 	);
 }
+
 export default App;

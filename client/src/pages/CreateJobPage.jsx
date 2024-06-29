@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import ChipsSelector from "../components/ChipsSelector";
 import styles from "./CreateJobPage.module.css";
@@ -56,9 +57,8 @@ const CreateJobPage = ({ currentUser }) => {
 		}
 	};
 
-
 	return (
-        <div className={styles.body}>       
+		<div className={styles.body}>
 			<h3>Add job description</h3>
 
 			<div className={styles.inputElement}>
@@ -87,7 +87,6 @@ const CreateJobPage = ({ currentUser }) => {
 					onChange={(e) => setJob({ ...job, title: e.target.value })}
 				/>
 			</div>
-
 			<div className={styles.inputElement}>
 				<label>Duration</label>
 				<input
@@ -132,7 +131,6 @@ const CreateJobPage = ({ currentUser }) => {
 					onChange={(e) => setJob({ ...job, location: e.target.value })}
 				/>
 			</div>
-
 			<div className={styles.inputElement}>
 				<label>Job Description</label>
 				<input

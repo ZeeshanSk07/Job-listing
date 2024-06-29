@@ -1,9 +1,11 @@
+/* eslint-disable react/prop-types */
+
 import { useState } from "react";
 import { Login, Register } from "../api/User";
 import { Navigate } from "react-router-dom";
 
 function RegisterPage({ setCurrentUser }) {
-    const [name, setName] = useState();
+	const [name, setName] = useState();
 	const [email, setEmail] = useState();
 	const [mobile, setMobile] = useState();
 	const [password, setPassword] = useState();
@@ -12,7 +14,6 @@ function RegisterPage({ setCurrentUser }) {
 	const handleRegister = async () => {
 		const response = await Register(name, email, mobile, password);
 		if (response.status === 201) {
-			
 			const loginResponse = await Login(email, password);
 			if (loginResponse.status === 200) {
 				setCurrentUser(true);
@@ -23,7 +24,8 @@ function RegisterPage({ setCurrentUser }) {
 			}
 		}
 	};
-    return (
+
+	return (
 		<div>
 			<h1>Register</h1>
 			<input
@@ -55,4 +57,5 @@ function RegisterPage({ setCurrentUser }) {
 		</div>
 	);
 }
+
 export default RegisterPage;
