@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../model/User');
 
+
 const JWT_SECRET = process.env.JWT_SECRET;
 
 function registerUser() {
@@ -9,7 +10,7 @@ function registerUser() {
         try {
             const { name, email, mobile, password } = req.body;
 
-            const existingUser = User.findOne({ email: email });
+            const existingUser = await User.findOne({ email: email });
 
             if (existingUser) {
                 const error = new Error('User already exists, please use another email address');
@@ -17,6 +18,7 @@ function registerUser() {
                 throw error;
             }
             const hashedPassword = await bcrypt.hash(password, 10);
+
             const newUser = new User({
                 name,
                 email,
@@ -50,7 +52,7 @@ function handleLogin() {
                 if (isPasswordCorrect) {
                     const token = jwt.sign(
                         { userID: existingUser._id }, //PAYLOAD (object you to convert to a string/token)
-                        JWT_SECRET // Secret Key, key that is being used to encrypt and validation signature 
+                        JWT_SECRET // Secret Key, key that is being used to encrypt and validation signature
                     );
                     res.status(200).json({
                         message: 'Login successful',
