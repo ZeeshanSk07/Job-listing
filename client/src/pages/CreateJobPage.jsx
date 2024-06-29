@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import ChipsSelector from "../components/ChipsSelector";
 import styles from "./CreateJobPage.module.css";
 import { createJob } from "../api/Job";
-import { set } from "mongoose";
 
 const CreateJobPage = ({ currentUser }) => {
 	const validJobTypes = ["Full-Time", "Part-Time", "Internship"];

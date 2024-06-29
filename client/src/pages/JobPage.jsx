@@ -1,5 +1,5 @@
 import React from "react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Header } from "../components/Header";
 import { fetchJobById } from "../api/Job";
 
@@ -12,12 +12,7 @@ const JobPage = ({ currentUser, setCurrentUser }) => {
 		fetchJob();
 	}, []);
 
-	useEffect(() => {
-		if (job) {
-			timeElapsed(job.createdAt);
-		}
-	}, [job]);
-
+	
 	const timeElapsedPretty = (createdAt) => {
 		const currentTime = new Date();
 		const createdAtTime = new Date(createdAt);

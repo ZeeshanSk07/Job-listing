@@ -1,8 +1,8 @@
 const validateNewJob = (req, res, next) => {
+
     try {
         const { companyName, title, description, logoUrl, salary, location, duration, locationType, information, jobType, skills } = req.body;
         const refUserId = req.refUserId;
-
         const parsedSalary = parseInt(salary);
 
         if (!companyName || !title || !description || !logoUrl || !parsedSalary || !location || !duration || !locationType || !information || !jobType || !skills || !refUserId) {
@@ -20,13 +20,15 @@ const validateNewJob = (req, res, next) => {
         const validLogoUrl = logoUrl.match(/^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|svg|webp))$/i);
         const validLocationType = validLocationTypes.includes(locationType);
         if (!validJobType) {
-            
+
+
         }
         if (!validSkills || !Array.isArray(skills) || skills.length === 0 || !skills.every(skill => typeof skill === 'string') || !validSalary || !validLogoUrl || !validLocationType) {
-             const error = new Error(`Invalid ${!validSkills ? 'skills' : ''} ${!Array.isArray(skills) ? 'skills' : ''} ${skills.length === 0 ? 'skills' : ''} ${!skills.every(skill => typeof skill === 'string') ? 'skills' : ''} ${!validSalary ? 'salary' : ''} ${!validLogoUrl ? 'logoUrl' : ''} ${!validLocationType ? 'locationType' : ''}`);
-             error.statusCode = 400;
+            const error = new Error(`Invalid ${!validSkills ? 'skills' : ''} ${!Array.isArray(skills) ? 'skills' : ''} ${skills.length === 0 ? 'skills' : ''} ${!skills.every(skill => typeof skill === 'string') ? 'skills' : ''} ${!validSalary ? 'salary' : ''} ${!validLogoUrl ? 'logoUrl' : ''} ${!validLocationType ? 'locationType' : ''}`);
+            error.statusCode = 400;
             throw error;
-        
+        }
+
         next();
 
     } catch (error) {
