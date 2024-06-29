@@ -21,6 +21,7 @@ function createNewJob() {
     return async (req, res, next) => {
         try {
             const { companyName, title, description, logoUrl, jobPosition, salary, location, duration, locationType, information, jobType, skills } = req.body;
+            console.log(req.body);
             const refUserId = req.refUserId;
             const newJob = new Job({
                 companyName,
@@ -61,16 +62,17 @@ function getFilteredJobs() {
             const jobs = await Job.find(
                 {
                    title: title || { $exists: true },
+                   skills: skills || { $exists: true }
                 }
             );
 
-            
+            const filteredJobs = jobs.filter(job => job.skills.includes(skills));
 
             //Handle this in the mongoose query itself
             res.status(200).json({
                 message: 'Job route is working fine',
                 status: 'Working',
-                jobs: jobs
+                jobs: skills ? filteredJobs : jobs
             });
         } catch (error) {
             next("Error Finding Jobs", error);
