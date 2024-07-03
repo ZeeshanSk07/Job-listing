@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BACKEND_ORIGIN_URL = 'http://localhost:3000';
+const BACKEND_ORIGIN_URL = '';
 
 
 const fetchJobs = async () => {
