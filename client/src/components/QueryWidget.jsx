@@ -40,9 +40,10 @@ export const QueryWidget = ({ query, setQuery, handleFetchJobs }) => {
 		<div className={styles.queryWidget}>
 			<input
 				type="text"
-				placeholder="Title"
+				placeholder="Type any job title"
 				value={query.title}
-				onChange={(e) => setQuery({ ...query, title: e.target.value })}
+				onChange={handleTitleChange}
+				className={styles.input}
 			/>
 			<div className={styles.filterRow}>
 				<div className={styles.skillsSelector}>

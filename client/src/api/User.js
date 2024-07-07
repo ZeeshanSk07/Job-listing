@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BACKEND_ORIGIN_URL = '';
+const BACKEND_ORIGIN_URL = 'http://localhost:4000';
 
 
 const Login = async (email, password) => {
@@ -15,7 +15,6 @@ const Login = async (email, password) => {
 const Register = async (name, email, mobile, password) => {
     try {
         const response = await axios.post(`/user/register`, { name, email, mobile, password });
-        console.log(response.data);
         return response;
     } catch (error) {
         return error.response.data;
